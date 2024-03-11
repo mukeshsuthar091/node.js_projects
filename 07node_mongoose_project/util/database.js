@@ -4,7 +4,7 @@ const MongoClient = mongodb.MongoClient;
 let _db;
 
 const mongoConnect = (callback) => {
-    MongoClient.connect('URL')    // write mongoDB url in place of 'URL'  
+    MongoClient.connect('URL')   // write mongoDB url in place of 'URL'
         .then(client => {
             console.log('Connected!');
             _db = client.db('shop');
