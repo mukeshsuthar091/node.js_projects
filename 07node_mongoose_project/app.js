@@ -33,9 +33,7 @@ app.use(shopRoutes);
 app.use(errorController.get404);
 
 mongoose
-  .connect(
-    "mongodb+srv://nova:nova000@cluster0.uqrrthi.mongodb.net/shop?retryWrites=true&w=majority&appName=Cluster0"
-  )
+  .connect("/URL")   // write mongoDB url insted /URL
   .then((result) => {
     console.log("Database Connected!");
     User.findOne().then((user) => {
