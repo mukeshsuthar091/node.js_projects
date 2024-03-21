@@ -26,6 +26,7 @@ exports.getProducts = (req, res, next) => {
         .limit(ITEMS_PER_PAGE);
     })
     .then((products) => {
+      console.log(products)
       res.render("shop/product-list", {
         prods: products,
         pageTitle: "Products",
