@@ -5,7 +5,7 @@ import mongoose, { modelNames } from "mongoose";
 import { getUserStatus, login } from "../controllers/auth.js";
 import User from "../models/user.js";
 
-describe("Auth Controller - Login", () => {
+describe("Auth Controller", function() {
   before(function (done) {
     mongoose
       .connect(
@@ -28,7 +28,7 @@ describe("Auth Controller - Login", () => {
 
   
 
-  it("should throw an error with code 500 if accessing the database fails", async () => {
+  it("should throw an error with code 500 if accessing the database fails", function(done) {
     sinon.stub(User, "findOne");
     User.findOne.throws();
 
@@ -39,12 +39,12 @@ describe("Auth Controller - Login", () => {
       },
     };
 
-    try {
-      await login(req, {}, () => {});
-    } catch (error) {
-      expect(error).to.be.an("error");
-      expect(error).to.have.property("statusCode", 500);
-    }
+      login(req, {}, () => {})
+      .then(result=>{
+      expect(result).to.be.an("error");
+      expect(result).to.have.property("statusCode", 500);
+      done();
+    })
 
     User.findOne.restore();
   });
